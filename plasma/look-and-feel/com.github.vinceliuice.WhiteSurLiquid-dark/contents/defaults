@@ -5,7 +5,7 @@ cursorTheme=WhiteSur-cursors
 ColorScheme=WhiteSurLiquidDark
 
 [kdeglobals][Icons]
-Theme=WhiteSur-dark
+Theme=WhiteSurMac-dark
 
 [kdeglobals][KDE]
 widgetStyle=kvantum-dark

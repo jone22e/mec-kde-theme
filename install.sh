@@ -94,10 +94,12 @@ install_plasma() {
   cp -r "${SRC_DIR}/plasma/look-and-feel/com.github.vinceliuice.${name}${pcolor}"      "${LOOKFEEL_DIR}"
 }
 
-# Launcher (Kickoff) icon used by the top panel layout: an Apple-style logo installed
-# into the hicolor icon theme, so it is found whatever icon theme is in use.
+# Icons used by the panel layouts: Apple logo, Launchpad and Terminal go into hicolor
+# (found whatever icon theme is in use); WhiteSurMac / WhiteSurMac-dark are tiny icon
+# themes that only override the trash icons and inherit WhiteSur (or Breeze) for the rest.
 install_icons() {
-  cp -r "${SRC_DIR}/plasma/icons/hicolor"                                              "${ICONS_DIR}"
+  rm -rf "${ICONS_DIR}/WhiteSurMac" "${ICONS_DIR}/WhiteSurMac-dark"
+  cp -r "${SRC_DIR}/plasma/icons/"{hicolor,WhiteSurMac,WhiteSurMac-dark}             "${ICONS_DIR}"
 }
 
 # Konsole with a macOS Terminal style icon: copy the system org.kde.konsole.desktop

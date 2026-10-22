@@ -20,6 +20,8 @@
 - Terminal with a macOS Terminal style icon (`whitesur-terminal`): `install.sh` copies the system `org.kde.konsole.desktop` into the user applications dir (`/usr/local/share/applications` as root) with only `Icon=` changed. The desktop entry id stays the same, so running Konsole windows keep grouping with the dock launcher on X11 and Wayland.
 - Top panel attached to the screen edge (`floating = false`, Plasma 6 floats new panels by default) and the dock floating like the macOS Dock.
 - Fixed the WhiteSurLiquid/WhiteSurLiquid-dark global themes pointing to non-existent names (Plasma theme `WhiteSurLiquidDark`, icon theme `WhiteSurLiquidDark`, cursors `WhiteSurLiquid*-cursors`), which made Plasma fall back to Breeze for panels and icons. They now use `WhiteSurLiquid-dark` / `WhiteSurLiquid` for the Plasma theme and the regular WhiteSur icon and cursor themes, like the other variants. Also fixed the ids in the Liquid desktop theme metadata.
+- macOS style trash icon: the trash applet always uses `user-trash`/`user-trash-full` from the icon theme, so the global themes now select `WhiteSurMac` / `WhiteSurMac-dark`, two tiny icon themes shipped here that only contain those icons and inherit WhiteSur (or Breeze when WhiteSur icons are not installed) for everything else.
+- Launchpad and Terminal icons fill the icon box like other app icons; the Apple logo is plain white instead of following the panel text colour.
 - Applies to the layout of all global themes (WhiteSur, WhiteSur-alt, WhiteSur-dark, WhiteSurLiquid, WhiteSurLiquid-dark); existing panels are not changed, re-apply the global theme with "Desktop and window layout" enabled.
 
 ## Notes

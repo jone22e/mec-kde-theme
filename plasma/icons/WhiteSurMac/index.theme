@@ -1,0 +1,13 @@
+[Icon Theme]
+Name=WhiteSur Mac
+Comment=macOS style trash icons for the WhiteSur KDE theme; everything else comes from the WhiteSur icon theme (or Breeze when it is not installed)
+Inherits=WhiteSur,WhiteSur-light,breeze,hicolor
+Example=user-trash
+Directories=places/scalable
+
+[places/scalable]
+Size=64
+MinSize=8
+MaxSize=512
+Type=Scalable
+Context=Places
