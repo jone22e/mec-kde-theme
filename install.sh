@@ -10,6 +10,8 @@ if [ "$UID" -eq "$ROOT_UID" ]; then
   LOOKFEEL_DIR="/usr/share/plasma/look-and-feel"
   KVANTUM_DIR="/usr/share/Kvantum"
   WALLPAPER_DIR="/usr/share/wallpapers"
+  ICONS_DIR="/usr/share/icons"
+  APPS_DIR="/usr/local/share/applications"
 else
   AURORAE_DIR="$HOME/.local/share/aurorae/themes"
   SCHEMES_DIR="$HOME/.local/share/color-schemes"
@@ -17,6 +19,8 @@ else
   LOOKFEEL_DIR="$HOME/.local/share/plasma/look-and-feel"
   KVANTUM_DIR="$HOME/.config/Kvantum"
   WALLPAPER_DIR="$HOME/.local/share/wallpapers"
+  ICONS_DIR="$HOME/.local/share/icons"
+  APPS_DIR="$HOME/.local/share/applications"
 fi
 
 SRC_DIR=$(cd $(dirname $0) && pwd)
@@ -47,6 +51,7 @@ EOF
 [[ ! -d "${LOOKFEEL_DIR}" ]] && mkdir -p "${LOOKFEEL_DIR}"
 [[ ! -d "${KVANTUM_DIR}" ]] && mkdir -p "${KVANTUM_DIR}"
 [[ ! -d "${WALLPAPER_DIR}" ]] && mkdir -p "${WALLPAPER_DIR}"
+[[ ! -d "${ICONS_DIR}" ]] && mkdir -p "${ICONS_DIR}"
 
 # cp -rf "${SRC_DIR}"/configs/Xresources "$HOME"/.Xresources
 
@@ -87,6 +92,29 @@ install_plasma() {
   cp -r "${SRC_DIR}/plasma/desktoptheme/${name}${pcolor}"                              "${PLASMA_DIR}"
   cp -r "${SRC_DIR}/plasma/desktoptheme/"{icons,weather}                               "${PLASMA_DIR}/${name}${pcolor}"
   cp -r "${SRC_DIR}/plasma/look-and-feel/com.github.vinceliuice.${name}${pcolor}"      "${LOOKFEEL_DIR}"
+}
+
+# Launcher (Kickoff) icon used by the top panel layout: an Apple-style logo installed
+# into the hicolor icon theme, so it is found whatever icon theme is in use.
+install_icons() {
+  cp -r "${SRC_DIR}/plasma/icons/hicolor"                                              "${ICONS_DIR}"
+}
+
+# Konsole with a macOS Terminal style icon: copy the system org.kde.konsole.desktop
+# to a higher-priority applications dir, changing only its Icon= line. Same desktop
+# entry id, so running Konsole windows still group with the dock launcher.
+install_terminal_launcher() {
+  local src dir dirs
+  IFS=':' read -ra dirs <<< "${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+  for dir in "${dirs[@]}"; do
+    [[ -f "${dir}/applications/org.kde.konsole.desktop" ]] && src="${dir}/applications/org.kde.konsole.desktop" && break
+  done
+  if [[ -z "${src}" ]]; then
+    echo -e "Konsole desktop file not found, skipping terminal icon override."
+    return 0
+  fi
+  [[ ! -d "${APPS_DIR}" ]] && mkdir -p "${APPS_DIR}"
+  sed 's/^Icon=.*/Icon=whitesur-terminal/' "${src}" > "${APPS_DIR}/org.kde.konsole.desktop"
 }
 
 install_aurorae() {
@@ -213,4 +241,6 @@ done
       done
     done
   done
+install_icons
+install_terminal_launcher
 echo -e "Install finished..."
