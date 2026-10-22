@@ -3,10 +3,8 @@ var panelScreen = panel.screen
 
 // No need to set panel.location as ShellCorona::addPanel will automatically pick one available edge
 
-// For an Icons-Only Task Manager on the bottom, *3 is too much, *2 is too little
-// Round down to next highest even number since the Panel size widget only displays
-// even numbers
-panel.height = 2 * Math.floor(gridUnit * 2.5 / 2)
+// Thin top bar, close to the height of the macOS menu bar
+panel.height = 28
 panel.location = "top"
 
 // Restrict horizontal panel to a maximum size of a 21:9 monitor
@@ -23,6 +21,9 @@ if (panel.formFactor === "horizontal") {
 }
 
 var kickoff = panel.addWidget("org.kde.plasma.kickoff")
+// Apple-style logo shipped by this theme in the hicolor icon theme (see install.sh)
+kickoff.currentConfigGroup = ["General"]
+kickoff.writeConfig("icon", "whitesur-start-here-symbolic")
 kickoff.currentConfigGroup = ["Shortcuts"]
 kickoff.writeConfig("global", "Alt+F1")
 
@@ -32,6 +33,11 @@ bpanel.lengthMode = "fit"
 bpanel.hiding = "dodgewindows"
 bpanel.height = 64
 
+// Dock, left to right like macOS: applications button, app launchers, trash
+var dockApps = bpanel.addWidget("org.kde.plasma.kicker")
+dockApps.currentConfigGroup = ["General"]
+dockApps.writeConfig("icon", "whitesur-launchpad")
+
 let taskBar = bpanel.addWidget("org.kde.plasma.icontasks")
 taskBar.currentConfigGroup = ["General"]
 taskBar.writeConfig("launchers", [
@@ -40,11 +46,19 @@ taskBar.writeConfig("launchers", [
     "applications:org.kde.konsole.desktop",
     "applications:systemsettings.desktop",
 ])
+
+bpanel.addWidget("org.kde.plasma.trash")
 panel.addWidget("org.kde.plasma.appmenu")
 panel.addWidget("org.kde.plasma.panelspacer")
 panel.addWidget("org.kde.plasma.marginsseparator")
 panel.addWidget("org.kde.plasma.systemtray")
 panel.addWidget("org.kde.plasma.marginsseparator")
-panel.addWidget("org.kde.plasma.digitalclock")
+// Clock like the macOS menu bar: "Wed 22 Oct  4:29 PM" on a single line
+var clock = panel.addWidget("org.kde.plasma.digitalclock")
+clock.currentConfigGroup = ["Appearance"]
+clock.writeConfig("showDate", true)
+clock.writeConfig("dateDisplayFormat", "BesideTime")
+clock.writeConfig("dateFormat", "custom")
+clock.writeConfig("customDateFormat", "ddd d MMM")
 panel.addWidget("org.kde.plasma.showdesktop")
 
