@@ -1,14 +1,14 @@
 [kcminputrc][Mouse]
-cursorTheme=WhiteSurLiquidDark-cursors
+cursorTheme=WhiteSur-cursors
 
 [kdeglobals][General]
 ColorScheme=WhiteSurLiquidDark
 
 [kdeglobals][Icons]
-Theme=WhiteSurLiquidDark
+Theme=WhiteSur-dark
 
 [kdeglobals][KDE]
-widgetStyle=kvantum
+widgetStyle=kvantum-dark
 
 [kwinrc][DesktopSwitcher]
 LayoutName=org.kde.breeze.desktop
@@ -23,4 +23,4 @@ library=org.kde.kwin.aurorae
 theme=__aurorae__svg__WhiteSurLiquid-dark
 
 [plasmarc][Theme]
-name=WhiteSurLiquidDark
+name=WhiteSurLiquid-dark

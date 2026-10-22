@@ -6,6 +6,7 @@ var panelScreen = panel.screen
 // Thin top bar, close to the height of the macOS menu bar
 panel.height = 28
 panel.location = "top"
+panel.floating = false
 
 // Restrict horizontal panel to a maximum size of a 21:9 monitor
 const maximumAspectRatio = 21/9;
@@ -32,6 +33,7 @@ bpanel.location = "bottom"
 bpanel.lengthMode = "fit"
 bpanel.hiding = "dodgewindows"
 bpanel.height = 64
+bpanel.floating = true
 
 // Dock, left to right like macOS: applications button, app launchers, trash
 var dockApps = bpanel.addWidget("org.kde.plasma.kicker")
