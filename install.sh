@@ -41,6 +41,7 @@ OPTIONS:
   -n, --name NAME         Specify theme name (Default: $THEME_NAME)
   -c, --color VARIANT     Specify color variant(s) [light|alt|dark] (Default: All variants)s)
   -w, --window VARIANT    Specify window variant(s) [default|opaque|sharp] (Default: round blur version)
+      --no-icons          Do not download/install the WhiteSur icon theme (used for uniform macOS style app icons)
   -h, --help              Show help
 EOF
 }
@@ -100,6 +101,30 @@ install_plasma() {
 install_icons() {
   rm -rf "${ICONS_DIR}/WhiteSurMac" "${ICONS_DIR}/WhiteSurMac-dark"
   cp -r "${SRC_DIR}/plasma/icons/"{hicolor,WhiteSurMac,WhiteSurMac-dark}             "${ICONS_DIR}"
+}
+
+# The WhiteSur icon theme (separate project, GPL-3.0) gives every app the same rounded
+# macOS style icon size and is inherited by the WhiteSurMac themes above. Install it
+# when it is not present yet. Skip with --no-icons.
+install_whitesur_icons() {
+  [[ "${no_icons}" == "true" ]] && return 0
+  local dir
+  for dir in "${ICONS_DIR}" /usr/share/icons /usr/local/share/icons "$HOME/.local/share/icons" "$HOME/.icons"; do
+    [[ -f "${dir}/WhiteSur-dark/index.theme" ]] && echo -e "WhiteSur icon theme already installed in ${dir}." && return 0
+  done
+  if ! command -v git >/dev/null 2>&1; then
+    echo -e "git not found, skipping WhiteSur icon theme (install it from https://github.com/vinceliuice/WhiteSur-icon-theme)."
+    return 0
+  fi
+  local tmp
+  tmp="$(mktemp -d)"
+  echo -e "Installing WhiteSur icon theme (vinceliuice/WhiteSur-icon-theme)..."
+  if git clone --depth=1 -q https://github.com/vinceliuice/WhiteSur-icon-theme.git "${tmp}/WhiteSur-icon-theme"; then
+    "${tmp}/WhiteSur-icon-theme/install.sh" -d "${ICONS_DIR}" || echo -e "WhiteSur icon theme install failed."
+  else
+    echo -e "Could not download the WhiteSur icon theme, skipping."
+  fi
+  rm -rf "${tmp}"
 }
 
 # Konsole with a macOS Terminal style icon: copy the system org.kde.konsole.desktop
@@ -205,6 +230,10 @@ while [[ "$#" -gt 0 ]]; do
         esac
       done
       ;;
+    --no-icons)
+      no_icons='true'
+      shift
+      ;;
     -h|--help)
       usage
       exit 0
@@ -244,5 +273,6 @@ done
     done
   done
 install_icons
+install_whitesur_icons
 install_terminal_launcher
 echo -e "Install finished..."
