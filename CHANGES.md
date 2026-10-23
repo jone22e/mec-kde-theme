@@ -23,6 +23,7 @@
 - Trash icons are now the macOS style ones from the WhiteSur icon theme (GPL-3.0, unchanged), and `install.sh` downloads and installs the WhiteSur icon theme itself when it is missing (skip with `--no-icons`), so all app icons in the dock get the same rounded macOS size.
 - macOS style trash icon: the trash applet always uses `user-trash`/`user-trash-full` from the icon theme, so the global themes now select `WhiteSurMac` / `WhiteSurMac-dark`, two tiny icon themes shipped here that only contain those icons and inherit WhiteSur (or Breeze when WhiteSur icons are not installed) for everything else.
 - Launchpad and Terminal icons fill the icon box like other app icons; the Apple logo is plain white instead of following the panel text colour.
+- Top-left launcher icon is the Brasiltec monogram (`whitesur-brasiltec`, from the favicon of brasiltec.ind.br); the Apple logo (`whitesur-start-here-symbolic`) stays installed and can be chosen in the Kickoff settings.
 - Applies to the layout of all global themes (WhiteSur, WhiteSur-alt, WhiteSur-dark, WhiteSurLiquid, WhiteSurLiquid-dark); existing panels are not changed, re-apply the global theme with "Desktop and window layout" enabled.
 
 ## Notes

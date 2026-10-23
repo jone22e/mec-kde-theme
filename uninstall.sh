@@ -41,6 +41,7 @@ uninstall() {
   [[ -f ${ICONS_DIR}/hicolor/symbolic/apps/whitesur-start-here-symbolic.svg ]] && rm -fv ${ICONS_DIR}/hicolor/symbolic/apps/whitesur-start-here-symbolic.svg
   [[ -f ${ICONS_DIR}/hicolor/scalable/apps/whitesur-launchpad.svg ]] && rm -fv ${ICONS_DIR}/hicolor/scalable/apps/whitesur-launchpad.svg
   [[ -f ${ICONS_DIR}/hicolor/scalable/apps/whitesur-terminal.svg ]] && rm -fv ${ICONS_DIR}/hicolor/scalable/apps/whitesur-terminal.svg
+  [[ -f ${ICONS_DIR}/hicolor/scalable/apps/whitesur-brasiltec.svg ]] && rm -fv ${ICONS_DIR}/hicolor/scalable/apps/whitesur-brasiltec.svg
   [[ -d ${ICONS_DIR}/WhiteSurMac ]] && rm -rfv ${ICONS_DIR}/WhiteSurMac ${ICONS_DIR}/WhiteSurMac-dark
   grep -qs '^Icon=whitesur-terminal$' ${APPS_DIR}/org.kde.konsole.desktop && rm -fv ${APPS_DIR}/org.kde.konsole.desktop
 }

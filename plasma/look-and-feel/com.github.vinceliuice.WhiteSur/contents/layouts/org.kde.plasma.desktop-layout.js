@@ -22,9 +22,10 @@ if (panel.formFactor === "horizontal") {
 }
 
 var kickoff = panel.addWidget("org.kde.plasma.kickoff")
-// Apple-style logo shipped by this theme in the hicolor icon theme (see install.sh)
+// Brasiltec monogram shipped by this theme in the hicolor icon theme (see install.sh);
+// whitesur-start-here-symbolic (Apple logo) is still installed as an alternative
 kickoff.currentConfigGroup = ["General"]
-kickoff.writeConfig("icon", "whitesur-start-here-symbolic")
+kickoff.writeConfig("icon", "whitesur-brasiltec")
 kickoff.currentConfigGroup = ["Shortcuts"]
 kickoff.writeConfig("global", "Alt+F1")
 
