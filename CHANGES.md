@@ -24,6 +24,7 @@
 - macOS style trash icon: the trash applet always uses `user-trash`/`user-trash-full` from the icon theme, so the global themes now select `WhiteSurMac` / `WhiteSurMac-dark`, two tiny icon themes shipped here that only contain those icons and inherit WhiteSur (or Breeze when WhiteSur icons are not installed) for everything else.
 - Launchpad and Terminal icons fill the icon box like other app icons; the Apple logo is plain white instead of following the panel text colour.
 - Top-left launcher icon is the Brasiltec monogram (`whitesur-brasiltec`, from the favicon of brasiltec.ind.br); the Apple logo (`whitesur-start-here-symbolic`) stays installed and can be chosen in the Kickoff settings.
+- Menus closer to macOS: Kvantum menus (global menu drop-downs) are less translucent (`reduce_menu_opacity` 25 -> 10, blur radius 12) with taller rows and wider side padding; the WhiteSurLiquid-dark popup background (Kicker/Kickoff, tray popups) went from 65% to 88% opaque so text stays readable over the wallpaper. Blur behind popups still depends on the KWin Blur effect being enabled.
 - Applies to the layout of all global themes (WhiteSur, WhiteSur-alt, WhiteSur-dark, WhiteSurLiquid, WhiteSurLiquid-dark); existing panels are not changed, re-apply the global theme with "Desktop and window layout" enabled.
 
 ## Notes
